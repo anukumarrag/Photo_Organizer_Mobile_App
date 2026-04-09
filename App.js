@@ -259,8 +259,10 @@ export default function App() {
       {/* ── Header ─────────────────────────────────────────────────────── */}
       <View style={styles.header}>
         <Text style={styles.folderText}>📁 {folderName}</Text>
+        {/* Shows "Photo 1 of 4" … "Photo 4 of 4" during capture,
+            then stays at "Photo 4 of 4" once all photos are done. */}
         <Text style={styles.counter}>
-          Photo {Math.min(photoCount + 1, MAX_PHOTOS)} of {MAX_PHOTOS}
+          Photo {phase === 'done' ? MAX_PHOTOS : photoCount + 1} of {MAX_PHOTOS}
         </Text>
       </View>
 
@@ -464,13 +466,13 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: 10,
   },
   dot: {
     width: 14,
     height: 14,
     borderRadius: 7,
     borderWidth: 2,
+    marginHorizontal: 5,
   },
   dotFilled: {
     backgroundColor: '#e94560',
